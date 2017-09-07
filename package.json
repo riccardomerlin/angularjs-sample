@@ -1,0 +1,46 @@
+{
+  "name": "data-fetch",
+  "version": "1.0.0",
+  "description": "fetch, search, filter and paging data from a json source",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "gulp && node index.js"
+  },
+  "keywords": [
+    "angularjs",
+    "fetch",
+    "data",
+    "search",
+    "filter",
+    "paging",
+    "json"
+  ],
+  "author": "Riccardo Merlin",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "1.4.7",
+    "angular-block-ui": "0.2.0",
+    "angular-messages": "1.4.7",
+    "angular-route": "1.4.7",
+    "angular-sanitize": "1.4.7",
+    "angular-touch": "1.4.7",
+    "angular-ui-router": "0.2.15"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.24.1",
+    "babelify": "^7.3.0",
+    "browserify": "^14.4.0",
+    "del": "^3.0.0",
+    "eslint-config-airbnb-base": "^12.0.0",
+    "eslint-plugin-import": "^2.7.0",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^4.0.0",
+    "gulp-htmlmin": "^3.0.0",
+    "gulp-plumber": "^1.1.0",
+    "gulp-sourcemaps": "^2.6.1",
+    "gulp-streamify": "^1.0.2",
+    "gulp-uglify": "^3.0.0",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}
