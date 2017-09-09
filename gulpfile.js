@@ -9,11 +9,31 @@ const babelify = require("babelify");
 const htmlmin = require('gulp-htmlmin');
 const del = require('del');
 const sourcemaps = require('gulp-sourcemaps');
+const nodemon = require('nodemon');
 
-gulp.task('default', ['lint', 'dist:cleanup', 'js:bundle', 'js:vendor:bundle', 'html:copy']);
+gulp.task('default', [
+  'js:lint',
+  'dist:cleanup',
+  'js:bundle',
+  'js:vendor:bundle',
+  'html:copy',
+  'data:copy'
+]);
 
-gulp.task('lint', () => {
-  return gulp.src(['src/**/*.js', '!node_modules/**', '!dist/**', '!src/**/___*/**/*'])
+gulp.task('js:lint', jsLint);
+gulp.task('js:vendor:bundle', ['dist:cleanup'], jsVendorBundle);
+gulp.task('js:bundle', ['js:lint', 'dist:cleanup'], jsBundle);
+gulp.task('html:copy', ['dist:cleanup'], htmlCopy);
+gulp.task('data:copy', ['dist:cleanup'], dataCopy);
+gulp.task('dist:cleanup', distCleanUp);
+
+function jsLint() {
+  return gulp.src([
+    'src/**/*.js',
+    '!node_modules/**',
+    '!dist/**',
+    '!src/**/___*/**/*',
+  ])
     .pipe(plumber())
     .pipe(eslint({
       globals: [
@@ -25,9 +45,28 @@ gulp.task('lint', () => {
     }))
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());
-});
+}
 
-gulp.task('js:vendor:bundle', ['dist:cleanup'], () => {
+function jsBundle() {
+  const bundleStream = browserify([
+    'src/app.module.js',
+    'src/app.module.config.js',
+    'src/list/list.controller.js',
+    'src/list/list.service.js',
+  ])
+    .transform(babelify)
+    .bundle();
+
+  return bundleStream
+    .pipe(plumber())
+    .pipe(source('bundle.min.js'))
+    .pipe(streamify(sourcemaps.init()))
+    .pipe(streamify(uglify()))
+    .pipe(streamify(sourcemaps.write()))
+    .pipe(gulp.dest('./dist/'));
+}
+
+function jsVendorBundle() {
   const bundleStream = browserify([
     'node_modules/angular/angular.min.js',
     'node_modules/angular-block-ui/dist/angular-block-ui.min.js',
@@ -43,32 +82,44 @@ gulp.task('js:vendor:bundle', ['dist:cleanup'], () => {
     .pipe(plumber())
     .pipe(source('vendor.min.js'))
     .pipe(gulp.dest('./dist/'));
-});
+}
 
-gulp.task('js:bundle', ['lint', 'dist:cleanup'], () => {
-  const bundleStream = browserify([
-    'src/app.module.js',
-    'src/app.module.config.js',
-    'src/list/list.controller.js',
-  ])
-    .transform(babelify)
-    .bundle();
-
-  return bundleStream
-    .pipe(plumber())
-    .pipe(source('bundle.min.js'))
-    .pipe(streamify(sourcemaps.init()))
-    .pipe(streamify(uglify()))
-    .pipe(streamify(sourcemaps.write()))
-    .pipe(gulp.dest('./dist/'));
-});
-
-gulp.task('html:copy', ['dist:cleanup'], () => {
+function htmlCopy() {
   return gulp.src('./src/**/*.html')
     .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(gulp.dest('./dist/'));
-});
+}
 
-gulp.task('dist:cleanup', () => {
+function dataCopy() {
+  return gulp.src('./src/**/*.json')
+    .pipe(gulp.dest('./dist/db/'));
+}
+
+function distCleanUp() {
   return del('./dist/');
-});
+}
+
+function debug() {
+  return nodemon({
+    script: './index.js',
+    ext: 'js html',
+    watch: ['./src/'],
+    ignore: ['*.test.js'],
+  })
+    .on('restart', () => {
+      return [
+        'js:lint',
+        'dist:cleanup',
+        'js:bundle',
+        'html:copy',
+      ]
+    });
+  // .on('restart', () => {
+  //   // jsLint();
+  //   // distCleanUp();
+  //   // jsBundle();
+  //   // htmlCopy();
+
+  //   console.log('server restarted!');
+  // });
+}
