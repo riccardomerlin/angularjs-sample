@@ -50,7 +50,6 @@ gulp.task('js:bundle', ['lint', 'dist:cleanup'], () => {
     'src/app.module.js',
     'src/app.module.config.js',
     'src/list/list.controller.js',
-    'src/home/home.controller.js',
   ])
     .transform(babelify)
     .bundle();
