@@ -7,7 +7,6 @@
     '$urlRouterProvider',
     '$httpProvider',
     '$locationProvider',
-    'siteRootUrl',
     'blockUIConfig',
   ];
 
@@ -16,7 +15,6 @@
     $urlRouterProvider,
     $httpProvider,
     $locationProvider,
-    siteRootUrl,
     blockUIConfig,
   ) {
     /* BlockUI Configuration */

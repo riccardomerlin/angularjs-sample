@@ -37,13 +37,11 @@ gulp.task('js:vendor:bundle', ['dist:cleanup'], () => {
     'node_modules/angular-touch/angular-touch.min.js',
     'node_modules/angular-ui-router/build/angular-ui-router.min.js',
   ])
-    .transform(babelify)
     .bundle();
 
   return bundleStream
     .pipe(plumber())
     .pipe(source('vendor.min.js'))
-    .pipe(streamify(uglify()))
     .pipe(gulp.dest('./dist/'));
 });
 
