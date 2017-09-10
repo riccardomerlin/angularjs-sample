@@ -7,8 +7,9 @@
       </li>
     </ul>
   </div>
-  <div data-ng-repeat="item in vm.data.items track by item.nm">
-    Name: {{::item.nm}}, Value: {{::item.va}}
+  <input type="text" placeholder="Search" data-ng-model="vm.search"/>
+  <div data-ng-repeat="item in vm.data.items | filter:vm.search track by item.nm">
+    Name: {{::item.nm}}, e-mail: {{::item.nm.toLowerCase()}}@iq4.com
   </div>
   <button type="button" data-ng-click="vm.fetch()">Load more...</button>
 </div>
