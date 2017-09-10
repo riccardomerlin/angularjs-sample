@@ -48,10 +48,10 @@ const processData = require('../list/processData');
           limit,
           filter
         );
-        results.items = items.concat(newResults);
 
-        if (results.total !== data.names.length) {
-          results.total = data.names.length;
+        results.items = items.concat(newResults.items);
+        if (results.total !== newResults.total) {
+          results.total = newResults.total;
         }
 
         currentFilter = filter;

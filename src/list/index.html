@@ -7,9 +7,10 @@
       </li>
     </ul>
   </div>
-  <input type="text" placeholder="Search" data-ng-model="vm.search"/>
+  <input type="text" placeholder="Search" data-ng-model="vm.search" />
   <div data-ng-repeat="item in vm.data.items | filter:vm.search track by item.nm">
     Name: {{::item.nm}}, e-mail: {{::item.nm.toLowerCase()}}@iq4.com
   </div>
-  <button type="button" data-ng-click="vm.fetch()">Load more...</button>
+  <button type="button" data-ng-click="vm.fetch()"
+  data-ng-hide="vm.data.items.length === vm.data.total">Load more...</button>
 </div>
