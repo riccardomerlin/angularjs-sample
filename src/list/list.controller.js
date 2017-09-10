@@ -11,8 +11,7 @@
     activate();
 
     function activate() {
-      vm.title = 'List page';
-      vm.pageSize = 50;
+      vm.pageSize = 20;
       vm.fetch = fetchData;
       vm.alphabet = getAlphabet();
       // watch the service data source to update
@@ -24,6 +23,7 @@
     }
 
     function fetchData() {
+      vm.appliedFilter = $stateParams.filter;
       listService.fetch(vm.pageSize, $stateParams.filter);
     }
 

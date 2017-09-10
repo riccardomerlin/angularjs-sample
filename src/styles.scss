@@ -1,9 +1,147 @@
+.content {
+  margin-bottom: 25px;
+}
+
 .alphabet {
   list-style: none;
   padding-left: 0;
 
   li {
     float: left;
+    height: 20px;
     padding-left: 5px;
+    width: 20px;
   }
+
+  .selected {
+    border-radius: 50%;
+    background-color: #006DB1;
+    a {
+      color: #fff;
+    }
+  }
+}
+
+.top-search {
+  background: #f8f8f8;
+  height: 55px;
+  position: relative;
+  width: 100%;
+
+  .menu {
+    background: url(../images/sprite.png) -235px 5px transparent;
+    float: left;
+    height: 38px;
+    margin-top: 35px;
+    position: absolute;
+    width: 51px;
+    top: -50%;
+  }
+
+  .search {
+    background: url(../images/sprite.png) -645px -45px transparent;
+    float: right;
+    height: 55px;
+    width: 55px;
+  }
+}
+
+.searchPanel {
+  height: 50px;
+}
+
+.top-nav {
+  height: 100px;
+  background-color: #1F2531;
+
+  .buttons-container {
+    width: 520px;
+
+    .nav-button {
+      color: #fff;
+      display: inline-block;
+      height: 80px;
+      margin: 10px;
+      text-align: center;
+      vertical-align: middle;
+      width: 80px;
+
+      & .user {
+        background: url('../images/sprite.png') -300px -50px transparent;
+        height: 62px;
+        margin: 0 auto;
+        width: 50px;
+      }
+
+      & .projects {
+        background: url('../images/sprite.png') -220px -50px transparent;
+        height: 62px;
+        margin: 0 auto;      
+        width: 62px;
+      }
+
+      & .workgroups {
+        background: url('../images/sprite.png') -150px -50px transparent;
+        height: 62px;
+        margin: 0 auto;      
+        width: 58px;
+      }
+
+      & .roleprofiles {
+        background: url('../images/sprite.png') -450px -50px transparent;
+        height: 62px;
+        margin: 0 auto;      
+        width: 62px;
+      }
+
+      & .communities {
+        background: url('../images/sprite.png') -373px -50px transparent;
+        height: 62px;
+        margin: 0 auto;   
+        width: 66px;
+      }
+    }
+  }
+}
+
+.community {
+
+  .user {
+    height: 85px;
+    
+    .user-badge {
+      background: url('../images/sprite.png') -105px -120px transparent;
+      height: 85px;
+      width: 85px;
+    }
+
+    .info-group {
+      position: absolute;
+      top: 50%;
+      margin-top: -22px;
+      margin-left: 85px;
+      padding: 0 5px;
+
+      .name {
+        color: #006DB1;
+        display: block;      
+      }
+      .email{
+        display: block;
+      } 
+    }
+  }
+}
+
+.button-load {
+  background-color: #217F74;
+  color: #fff;
+}
+
+.margin-top-10 {
+  margin-top: 10px;
+}
+
+.margin-top-20 {
+  margin-top: 20px;
 }

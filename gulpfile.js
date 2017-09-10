@@ -18,6 +18,7 @@ const sass = require('gulp-sass');
 const distPath = './dist';
 const jsDistPath = path.join(distPath, 'js/');
 const cssDistPath = path.join(distPath, 'css/');
+const imagesPath = path.join(distPath, 'images/');
 
 gulp.task('default', [
   'js:lint',
@@ -29,7 +30,8 @@ gulp.task('default', [
   'html:copy',
   'data:copy',
   'bootstrap:fonts:copy',
-  'jquery:copy'
+  'jquery:copy',
+  'assets:copy'
 ]);
 gulp.task('js:lint', jsLint);
 gulp.task('js:vendor:bundle', ['dist:cleanup'], jsVendorBundle);
@@ -41,6 +43,7 @@ gulp.task('css:vendor:bundle', ['dist:cleanup'], cssVendorBundle);
 gulp.task('bootstrap:fonts:copy', ['dist:cleanup'], bootstrapFontsCopy);
 gulp.task('jquery:copy', ['dist:cleanup'], jqueryCopy);
 gulp.task('sass:compile', ['dist:cleanup'], sassCompile);
+gulp.task('assets:copy', ['dist:cleanup'], assetsCopy);
 
 function jsLint() {
   return gulp.src([
@@ -53,6 +56,11 @@ function jsLint() {
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());
+}
+
+function assetsCopy() {
+  return gulp.src('./src/assets/**/*')
+    .pipe(gulp.dest(imagesPath));
 }
 
 function jsBundle() {

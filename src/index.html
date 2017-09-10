@@ -11,7 +11,68 @@
 </head>
 
 <body>
-  <div data-ui-view class="container-fluid"></div>
+  <!-- top search -->
+  <nav class="top-search">
+    <div class="container-fluid">
+      <div class="menu"></div>
+      <a class="search" data-toggle="collapse" href="#searchPanel"></a>
+    </div>
+  </nav>
+  <!-- search panel -->
+  <div id="searchPanel" class="searchPanel collapse container-fluid">
+    <div class="margin-top-10 input-group">
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Content <span class="caret"></span></button>
+        <ul class="dropdown-menu">
+          <li><a href="#">Content 1</a></li>
+          <li><a href="#">Content 2</a></li>
+        </ul>
+      </div>
+      <input type="text" class="form-control">
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-default">Go! </button>
+      </div>
+    </div>
+  </div>
+  <!-- navbar -->
+  <nav>
+    <div class="container-fluid top-nav">
+      <div class="row">
+        <div class="col-md-3 col-sm-1"></div>
+        <div class="col-md-6 col-sm-8">
+          <div class="buttons-container center-block">
+            <a class="nav-button" href="#">
+              <div class="user"></div>
+              Passport
+            </a>
+            <a class="nav-button" href="#">
+              <div class="projects"></div>
+              Projects
+            </a>
+            <a class="nav-button" href="#">
+              <div class="workgroups"></div>
+              Workgroups
+            </a>
+            <a class="nav-button" href="#">
+              <div class="roleprofiles"></div>
+              Role profiles
+            </a>
+            <a class="nav-button" href="#">
+              <div class="communities"></div>
+              Communities
+            </a>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-1"></div>
+      </div>
+    </div>
+  </nav>
+  <!-- content -->
+  <div class="row content">
+    <div class="col-md-12 col-sm-12">
+      <div data-ui-view class="container-fluid"></div>
+    </div>
+  </div>
   <script src="js/jquery.min.js"></script>
   <script src="js/vendor.min.js"></script>
   <script src="js/bundle.min.js"></script>
