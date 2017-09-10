@@ -29,11 +29,11 @@
     blockUIConfig.autoInjectBodyBlock = false;
 
     // routing
-    $urlRouterProvider.otherwise('/list');
+    $urlRouterProvider.otherwise('/list/');
 
     $stateProvider
       .state('list', {
-        url: '/list',
+        url: '/list/{filter}',
         templateUrl: 'list/index.html',
         controller: 'ListController',
         controllerAs: 'vm',

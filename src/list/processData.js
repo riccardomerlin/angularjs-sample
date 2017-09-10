@@ -2,9 +2,15 @@ module.exports = {
   getNewResults: getNewResults,
 };
 
-function getNewResults(collection, dataSource, limit) {
-  const skip = collection.length;
-  const items = dataSource.slice(skip, skip + limit);
+function getNewResults(dataSource, skip, limit, filter) {
+  let source = dataSource;
+  if (filter) {
+    const startsWidthFilter = filter.toLowerCase().slice(0, 1);
+    source = dataSource.filter(item =>
+      item.nm.toLowerCase().startsWith(startsWidthFilter));
+  }
 
-  return collection.concat(items);
+  const items = source.slice(skip, skip + limit);
+
+  return items;
 }

@@ -8,6 +8,7 @@ const processData = require('../list/processData');
   listService.$inject = ['$http'];
 
   function listService($http) {
+    let currentFilter;
     const results = {
       total: 0,
       items: [],
@@ -24,7 +25,7 @@ const processData = require('../list/processData');
       return results;
     }
 
-    function fetch(limit) {
+    function fetch(limit, filter) {
       $http({
         method: 'GET',
         url: 'db/names.json',
@@ -34,12 +35,26 @@ const processData = require('../list/processData');
         .error(error);
 
       function success(data) {
-        if (data) {
-          results.items = processData.getNewResults(results.items, data.names, limit);
-          if (results.total !== data.names.length) {
-            results.total = data.names.length;
-          }
+        if (!data) { return; }
+
+        let { items } = results;
+        if (currentFilter !== filter) {
+          items = [];
         }
+
+        const newResults = processData.getNewResults(
+          data.names,
+          items.length,
+          limit,
+          filter
+        );
+        results.items = items.concat(newResults);
+
+        if (results.total !== data.names.length) {
+          results.total = data.names.length;
+        }
+
+        currentFilter = filter;
       }
 
       function error() {

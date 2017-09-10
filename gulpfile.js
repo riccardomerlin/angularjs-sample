@@ -32,17 +32,10 @@ function jsLint() {
     'src/**/*.js',
     '!node_modules/**',
     '!dist/**',
-    '!src/**/___*/**/*',
+    '!src/**/___*/**/*'
   ])
     .pipe(plumber())
-    .pipe(eslint({
-      globals: [
-        'describe',
-        'test',
-        'expect',
-        'angular'
-      ]
-    }))
+    .pipe(eslint())
     .pipe(eslint.format())
     .pipe(eslint.failAfterError());
 }

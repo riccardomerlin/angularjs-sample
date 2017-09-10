@@ -11,12 +11,20 @@
     ],
     "no-param-reassign": [
       "error",
-      { 
-        "props": false 
+      {
+        "props": false
       }
     ],
     "object-shorthand": "off",
     "no-trailing-spaces": "off",
-    "comma-dangle": "off"
+    "comma-dangle": "off",
+    "no-plusplus": "off"
+  },
+  "globals": {
+    "beforeEach": true,
+    "describe": true,
+    "test": true,
+    "expect": true,
+    "angular": true
   }
 }

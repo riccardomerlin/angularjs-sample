@@ -1,7 +1,14 @@
 <h1>{{vm.title}}</h1>
 <div>
-  <div data-ng-repeat="item in vm.data.items track by $index">
+  <div>
+    <ul>
+      <li data-ng-repeat="letter in ::vm.alphabet track by letter">
+        <a data-ui-sref="list({filter: letter})">{{::letter}}</a>
+      </li>
+    </ul>
+  </div>
+  <div data-ng-repeat="item in vm.data.items track by item.nm">
     Name: {{::item.nm}}, Value: {{::item.va}}
   </div>
-  <button type="button" data-ng-click="vm.fetch()" >Load more...</button>
+  <button type="button" data-ng-click="vm.fetch()">Load more...</button>
 </div>
