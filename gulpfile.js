@@ -13,6 +13,7 @@ const nodemon = require('nodemon');
 const cleanCSS = require('gulp-clean-css');
 const path = require('path');
 const rename = require("gulp-rename");
+const sass = require('gulp-sass');
 
 const distPath = './dist';
 const jsDistPath = path.join(distPath, 'js/');
@@ -24,6 +25,7 @@ gulp.task('default', [
   'js:bundle',
   'js:vendor:bundle',
   'css:vendor:bundle',
+  'sass:compile',
   'html:copy',
   'data:copy',
   'bootstrap:fonts:copy',
@@ -38,6 +40,7 @@ gulp.task('dist:cleanup', distCleanUp);
 gulp.task('css:vendor:bundle', ['dist:cleanup'], cssVendorBundle);
 gulp.task('bootstrap:fonts:copy', ['dist:cleanup'], bootstrapFontsCopy);
 gulp.task('jquery:copy', ['dist:cleanup'], jqueryCopy);
+gulp.task('sass:compile', ['dist:cleanup'], sassCompile);
 
 function jsLint() {
   return gulp.src([
@@ -73,7 +76,7 @@ function jsBundle() {
 
 function jqueryCopy() {
   return gulp.src('node_modules/jquery/dist/jquery.min.js')
-  .pipe(gulp.dest(jsDistPath));
+    .pipe(gulp.dest(jsDistPath));
 }
 
 function jsVendorBundle() {
@@ -110,6 +113,15 @@ function dataCopy() {
 
 function distCleanUp() {
   return del(distPath);
+}
+
+function sassCompile() {
+  return gulp.src('./src/**/*.scss')
+    .pipe(sourcemaps.init())
+    .pipe(sass({ outputStyle: 'compressed' }).on('error', sass.logError))
+    .pipe(sourcemaps.write())
+    .pipe(rename('bundle.min.css'))
+    .pipe(gulp.dest(cssDistPath));
 }
 
 function cssVendorBundle() {

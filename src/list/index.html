@@ -1,16 +1,13 @@
 <h1>{{vm.title}}</h1>
 <div>
-  <div>
-    <ul>
-      <li data-ng-repeat="letter in ::vm.alphabet track by letter">
-        <a data-ui-sref="list({filter: letter})">{{::letter}}</a>
-      </li>
-    </ul>
-  </div>
+  <ul class="alphabet clearfix">
+    <li data-ng-repeat="letter in ::vm.alphabet track by letter">
+      <a data-ui-sref="list({filter: letter})">{{::letter}}</a>
+    </li>
+  </ul>
   <input type="text" placeholder="Search" data-ng-model="vm.search" />
   <div data-ng-repeat="item in vm.data.items | filter:vm.search track by item.nm">
     Name: {{::item.nm}}, e-mail: {{::item.nm.toLowerCase()}}@iq4.com
   </div>
-  <button type="button" data-ng-click="vm.fetch()"
-  data-ng-hide="vm.data.items.length === vm.data.total">Load more...</button>
+  <button type="button" data-ng-click="vm.fetch()" data-ng-hide="vm.data.items.length === vm.data.total">Load more...</button>
 </div>
