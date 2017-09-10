@@ -1,34 +1,39 @@
-<div class="row margin-top-20">
-  <div class="col-md-3 col-sm-3">
-    <input type="text" placeholder="Filter..." data-ng-model="vm.search" />
+<div class="community">
+  <div class="row margin-top-20">
+    <div class="col-md-3 col-sm-3">
+      <input type="text" class="form-control" placeholder="Filter..." data-ng-model="vm.search" />
+    </div>
+    <div class="col-md-6 col-sm-6">
+      <ul class="alphabet">
+        <li data-ng-class="{'selected': vm.appliedFilter === letter}" data-ng-repeat="letter in ::vm.alphabet track by letter">
+          <a href="#" data-ui-sref="list({filter: letter})" data-toggle="tooltip" title="aaaaa">{{::letter}}</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-3 col-sm-3">
+      <a href="#" class="send-email pull-right" data-toggle="tooltip" data-placement="top" title="e-mail selected members"></a>
+    </div>
   </div>
-  <div class="col-md-6 col-sm-6">
-    <ul class="alphabet">
-      <li ng-class="{'selected': vm.appliedFilter === letter}" data-ng-repeat="letter in ::vm.alphabet track by letter">
-        <a data-ui-sref="list({filter: letter})">{{::letter}}</a>
-      </li>
-    </ul>
-  </div>
-  <div class="col-md-3 col-sm-3">
-    <button type="button">button</button>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-12 col-sm-12">
-    <div class="row community margin-top-20">
-      <div class="col-md-4 col-sm-6" data-ng-repeat="item in vm.data.items | filter:vm.search track by item.nm">
-        <div class="user">
-          <div class="user-badge"></div>
-          <div class="info-group">
-            <span class="name">{{::item.nm}}</span>
-            <span class="email">{{::item.nm.toLowerCase()}}@iq4.com</span>
+  <div class="row">
+    <div class="col-md-12 col-sm-12">
+      <div class="row margin-top-20">
+        <div class="col-md-4 col-sm-6" data-ng-repeat="item in vm.data.items | filter:vm.search track by item.nm">
+          <div class="user">
+            <a class="user-badge" role="button" data-ng-click="vm.select(item)" data-ng-class="{'user-badge-selected': item.selected}"
+              href="#">
+             <span class="checkbox"></span>
+          </a>
+            <div class="info-group">
+              <span class="name">{{::item.nm}}</span>
+              <span class="email">{{::item.nm.toLowerCase()}}@iq4.com</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12 col-sm-12">
-        <button type="button" class="btn btn-default button-load center-block margin-top-10" data-ng-click="vm.fetch()" data-ng-hide="vm.data.items.length === vm.data.total">Load more...</button>
+      <div class="row">
+        <div class="col-md-12 col-sm-12">
+          <button type="button" class="btn btn-default button-load center-block margin-top-10" data-ng-click="vm.fetch()" data-ng-hide="vm.data.items.length === vm.data.total">Load more...</button>
+        </div>
       </div>
     </div>
   </div>

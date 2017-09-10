@@ -2,22 +2,72 @@
   margin-bottom: 25px;
 }
 
+.text-row {
+  background-color: #ccc;
+
+  .text-container {
+    margin-left: 100px;
+    margin-right: 100px;
+    padding: 10px;
+    position: relative;
+    min-height: 140px;
+
+    .img {
+      background: url(../images/sprite.png) -450px -350px transparent;
+      height: 120px;
+      width: 120px;
+      margin-right: 10px;
+      position: absolute;
+    }
+
+    .text {
+      float: left;
+      margin-right: 150px;
+      margin-left: 130px;
+    }
+
+    .cog-container {
+      position: absolute;
+      right: 100px;
+      top: 50%;
+      margin-top: -20px; 
+    }
+
+    .cog {
+      background: url(../images/sprite.png) -587px -48px transparent;
+      display: block;
+      height: 53px;
+      width: 53px;
+    }
+  }
+}
+
+.community {
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
 .alphabet {
   list-style: none;
   padding-left: 0;
 
   li {
     float: left;
-    height: 20px;
-    padding-left: 5px;
-    width: 20px;
-  }
 
-  .selected {
-    border-radius: 50%;
-    background-color: #006DB1;
+    &.selected {
+      border-radius: 50%;
+      background-color: #006DB1;
+
+      a {
+        color: #fff;
+      }
+    }
+
     a {
-      color: #fff;
+      display: block;
+      height: 20px;
+      padding-left: 5px;      
+      width: 20px;
     }
   }
 }
@@ -30,7 +80,6 @@
 
   .menu {
     background: url(../images/sprite.png) -235px 5px transparent;
-    float: left;
     height: 38px;
     margin-top: 35px;
     position: absolute;
@@ -44,6 +93,13 @@
     height: 55px;
     width: 55px;
   }
+}
+
+.send-email {
+  background: url(../images/sprite.png) -290px 0 transparent;
+  display: block;
+  height: 50px;
+  width: 50px;
 }
 
 .searchPanel {
@@ -104,32 +160,51 @@
   }
 }
 
-.community {
+.user {
+  height: 85px;
+  
+  .user-badge {
+    display: block;
+    background: url('../images/sprite.png') -612px -410px #ccc;
+    border-radius: 50%;
+    height: 80px;
+    width: 80px;
+    box-sizing: border-box;
+    border: 2px solid transparent;      
+  }
 
-  .user {
-    height: 85px;
-    
-    .user-badge {
-      background: url('../images/sprite.png') -105px -120px transparent;
-      height: 85px;
-      width: 85px;
+  .checkbox {
+    background: url('../images/sprite.png') -476px -29px transparent;
+    height: 12px;
+    left: 50%;
+    margin-left: -6px;
+    top: 53px;
+    width: 12px;
+  }
+
+  .user-badge-selected {
+    background-color: #217F74;
+    border: 2px solid #217F74;
+
+    .checkbox {
+      background: url('../images/sprite.png') -438px -29px transparent;
     }
+  }
 
-    .info-group {
-      position: absolute;
-      top: 50%;
-      margin-top: -22px;
-      margin-left: 85px;
-      padding: 0 5px;
+  .info-group {
+    position: absolute;
+    top: 50%;
+    margin-top: -22px;
+    margin-left: 85px;
+    padding: 0 5px;
 
-      .name {
-        color: #006DB1;
-        display: block;      
-      }
-      .email{
-        display: block;
-      } 
+    .name {
+      color: #006DB1;
+      display: block;      
     }
+    .email{
+      display: block;
+    } 
   }
 }
 

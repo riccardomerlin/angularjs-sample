@@ -18,6 +18,7 @@
       // the view if the collection gets changed
       // in the service instance
       vm.data = listService.getData();
+      vm.select = select;
 
       fetchData();
     }
@@ -37,6 +38,10 @@
       }
 
       return a;
+    }
+
+    function select(item) {
+      item.selected = !item.selected;
     }
   }
 }());
