@@ -10,22 +10,34 @@ const htmlmin = require('gulp-htmlmin');
 const del = require('del');
 const sourcemaps = require('gulp-sourcemaps');
 const nodemon = require('nodemon');
+const cleanCSS = require('gulp-clean-css');
+const path = require('path');
+const rename = require("gulp-rename");
+
+const distPath = './dist';
+const jsDistPath = path.join(distPath, 'js/');
+const cssDistPath = path.join(distPath, 'css/');
 
 gulp.task('default', [
   'js:lint',
   'dist:cleanup',
   'js:bundle',
   'js:vendor:bundle',
+  'css:vendor:bundle',
   'html:copy',
-  'data:copy'
+  'data:copy',
+  'bootstrap:fonts:copy',
+  'jquery:copy'
 ]);
-
 gulp.task('js:lint', jsLint);
 gulp.task('js:vendor:bundle', ['dist:cleanup'], jsVendorBundle);
 gulp.task('js:bundle', ['js:lint', 'dist:cleanup'], jsBundle);
 gulp.task('html:copy', ['dist:cleanup'], htmlCopy);
 gulp.task('data:copy', ['dist:cleanup'], dataCopy);
 gulp.task('dist:cleanup', distCleanUp);
+gulp.task('css:vendor:bundle', ['dist:cleanup'], cssVendorBundle);
+gulp.task('bootstrap:fonts:copy', ['dist:cleanup'], bootstrapFontsCopy);
+gulp.task('jquery:copy', ['dist:cleanup'], jqueryCopy);
 
 function jsLint() {
   return gulp.src([
@@ -56,7 +68,12 @@ function jsBundle() {
     .pipe(streamify(sourcemaps.init()))
     .pipe(streamify(uglify()))
     .pipe(streamify(sourcemaps.write()))
-    .pipe(gulp.dest('./dist/'));
+    .pipe(gulp.dest(jsDistPath));
+}
+
+function jqueryCopy() {
+  return gulp.src('node_modules/jquery/dist/jquery.min.js')
+  .pipe(gulp.dest(jsDistPath));
 }
 
 function jsVendorBundle() {
@@ -68,28 +85,45 @@ function jsVendorBundle() {
     'node_modules/angular-sanitize/angular-sanitize.min.js',
     'node_modules/angular-touch/angular-touch.min.js',
     'node_modules/angular-ui-router/build/angular-ui-router.min.js',
+    'node_modules/bootstrap/dist/js/bootstrap.min.js'
   ])
     .bundle();
 
   return bundleStream
     .pipe(plumber())
     .pipe(source('vendor.min.js'))
-    .pipe(gulp.dest('./dist/'));
+    .pipe(gulp.dest(jsDistPath));
 }
 
 function htmlCopy() {
   return gulp.src('./src/**/*.html')
+    .pipe(plumber())
     .pipe(htmlmin({ collapseWhitespace: true }))
-    .pipe(gulp.dest('./dist/'));
+    .pipe(gulp.dest(distPath));
 }
 
 function dataCopy() {
   return gulp.src('./src/**/*.json')
+    .pipe(plumber())
     .pipe(gulp.dest('./dist/db/'));
 }
 
 function distCleanUp() {
-  return del('./dist/');
+  return del(distPath);
+}
+
+function cssVendorBundle() {
+  return gulp.src('node_modules/bootstrap/dist/css/bootstrap.min.css')
+    .pipe(plumber())
+    .pipe(cleanCSS())
+    .pipe(rename('vendor.min.css'))
+    .pipe(gulp.dest(cssDistPath));
+}
+
+function bootstrapFontsCopy() {
+  return gulp.src('node_modules/bootstrap/dist/fonts/*.*')
+    .pipe(plumber())
+    .pipe(gulp.dest(path.join(distPath, 'fonts/')));
 }
 
 function debug() {
