@@ -10,14 +10,13 @@ The app fetches data from a predefined json file.
 Getting started
 ---------------
 
-To install and build the application, run the following commands:
+Get source files and install dependencies
 ```bash
-git clone <repo>
+git clone https://github.com/riccardomerlin/angularjs-sample.git
 npm install
-gulp
 ```
 
-Run the web server using
+Build and run the web server using
 ```bash
 npm start
 ```
