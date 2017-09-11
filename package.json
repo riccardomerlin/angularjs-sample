@@ -1,5 +1,5 @@
 {
-  "name": "data-fetch",
+  "name": "angularjs-sample",
   "version": "1.0.0",
   "description": "fetch, search, filter and paging data from a json source",
   "main": "index.js",
