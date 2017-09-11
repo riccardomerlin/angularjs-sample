@@ -1,6 +1,8 @@
 Angular app sample
 ==================
 
+[![Build Status](https://travis-ci.org/riccardomerlin/angularjs-sample.svg)](https://travis-ci.org/riccardomerlin/angularjs-sample)
+
 Make use of Angular 1.4, Bootstrap 3, NodeJs and Gulp to build and serve
 a Single Page Application that displayes a list of users and allow
 to filter results by alphabet letter.
