@@ -31,4 +31,8 @@ To run the suits of tests
 npm test
 ```
 
+License
+-------
+[MIT](https://github.com/riccardomerlin/angularjs-sample/blob/master/LICENSE.md)
+
 
